@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string.h>
+
+// Define a structure for student details using typedef
+typedef struct {
+    char name[50];
+    int rollNo;
+    float marks;
+} Student;
+
+int main() {
+    int n;  // Number of students
+
+    // Get the number of students
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+
+    // Declare an array of structures to hold details of n students
+    Student students[n];
+
+    // Input details for each student
+    for (int i = 0; i < n; i++) {
+        printf("\nEnter details for student %d:\n", i + 1);
+
+        printf("Enter name: ");
+        scanf("%s", students[i].name);  // Input student's name
+
+        printf("Enter roll number: ");
+        scanf("%d", &students[i].rollNo);  // Input student's roll number
+
+        printf("Enter marks: ");
+        scanf("%f", &students[i].marks);  // Input student's marks
+    }
+
+    // Display details of all students
+    printf("\nStudent Details:\n");
+    for (int i = 0; i < n; i++) {
+        printf("\nStudent %d:\n", i + 1);
+        printf("Name: %s\n", students[i].name);
+        printf("Roll Number: %d\n", students[i].rollNo);
+        printf("Marks: %.2f\n", students[i].marks);
+    }
+
+    return 0;
+}

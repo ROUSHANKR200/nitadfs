@@ -1,68 +1,77 @@
 #include <stdio.h>
 
+// Function to display array elements
 void display(int arr[], int size) {
     printf("Array elements: ");
     for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
+        printf("%d ", arr[i]);  // Print each element of the array
     }
     printf("\n");
 }
 
+// Function to insert an element at a specified position in the array
 void insert(int arr[], int size, int element, int position) {
     if (position < 0 || position > size) {
-        printf("Invalid position!\n");
+        printf("Invalid position!\n");  // Check if the position is valid
         return;
     }
+    // Shift elements to the right to make space for the new element
     for (int i = size; i > position; i--) {
         arr[i] = arr[i - 1];
     }
-    arr[position] = element;
+    arr[position] = element;  // Insert the element at the given position
     printf("Element inserted successfully.\n");
 }
 
-int delete(int arr[], int size, int position) { // Return new size
+// Function to delete an element at a specified position
+void delete(int arr[], int size, int position) {
     if (position < 0 || position >= size) {
-        printf("Invalid position!\n");
-        return size; // No change to size
-    }
-    for (int i = position; i < size - 1; i++) {
-        arr[i] = arr[i + 1]; // Shift elements to the left
-    }
-    printf("Element deleted successfully.\n");
-    return size - 1; // Return updated size
-}
-
-void update(int arr[], int size, int position, int new_value) {
-    if (position < 0 || position >= size) {
-        printf("Invalid position!\n");
+        printf("Invalid position!\n");  // Check if the position is valid
         return;
     }
-    arr[position] = new_value;
+    // Shift elements to the left to fill the gap after deletion
+    for (int i = position; i < size - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    printf("Element deleted successfully.\n");
+}
+
+// Function to update an element at a specified position with a new value
+void update(int arr[], int size, int position, int new_value) {
+    if (position < 0 || position >= size) {
+        printf("Invalid position!\n");  // Check if the position is valid
+        return;
+    }
+    arr[position] = new_value;  // Update the value at the specified position
     printf("Element updated successfully.\n");
 }
 
+// Function to search for an element in the array
 void search(int arr[], int size, int element) {
     for (int i = 0; i < size; i++) {
         if (arr[i] == element) {
-            printf("Element found at position %d\n", i);
+            printf("Element found at position %d\n", i);  // Element found
             return;
         }
     }
-    printf("Element not found in the array.\n");
+    printf("Element not found in the array.\n");  // Element not found
 }
 
 int main() {
     int arr[100], size, choice, element, position, new_value;
 
+    // Input the size of the array
     printf("Enter the size of the array: ");
     scanf("%d", &size);
 
+    // Input the elements of the array
     printf("Enter the elements of the array:\n");
     for (int i = 0; i < size; i++) {
         printf("Element %d: ", i + 1);
         scanf("%d", &arr[i]);
     }
 
+    // Menu-driven program to perform operations on the array
     while (1) {
         printf("\nMenu:\n");
         printf("1. Display\n");
@@ -76,25 +85,29 @@ int main() {
 
         switch (choice) {
         case 1:
-            display(arr, size);
+            display(arr, size);  // Display the array
             break;
 
         case 2:
+            // Insert an element at a specified position
             printf("Enter the element to insert: ");
             scanf("%d", &element);
             printf("Enter the position to insert at (0-based index): ");
             scanf("%d", &position);
             insert(arr, size, element, position);
-            size++; // Increase the size of the array
+            size++;  // Increase the size of the array after insertion
             break;
 
         case 3:
+            // Delete an element at a specified position
             printf("Enter the position to delete (0-based index): ");
             scanf("%d", &position);
-            size = delete(arr, size, position); // Update size after deletion
+            delete(arr, size, position);
+            size--;  // Decrease the size of the array after deletion
             break;
 
         case 4:
+            // Update an element at a specified position
             printf("Enter the position to update (0-based index): ");
             scanf("%d", &position);
             printf("Enter the new value: ");
@@ -103,17 +116,18 @@ int main() {
             break;
 
         case 5:
+            // Search for an element in the array
             printf("Enter the element to search: ");
             scanf("%d", &element);
             search(arr, size, element);
             break;
 
         case 6:
-            printf("Exiting program.\n");
-            return 0; // Exit the program
+            printf("Exiting program.\n");  // Exit the program
+            return 0;  // Terminate the program
 
         default:
-            printf("Invalid choice! Please try again.\n");
+            printf("Invalid choice! Please try again.\n");  // Invalid choice handling
         }
     }
 

@@ -20,15 +20,16 @@ void insert(int arr[], int size, int element, int position) {
     printf("Element inserted successfully.\n");
 }
 
-void delete (int arr[], int size, int position) {
+int delete(int arr[], int size, int position) { // Return new size
     if (position < 0 || position >= size) {
         printf("Invalid position!\n");
-        return;
+        return size; // No change to size
     }
     for (int i = position; i < size - 1; i++) {
-        arr[i] = arr[i + 1];
+        arr[i] = arr[i + 1]; // Shift elements to the left
     }
     printf("Element deleted successfully.\n");
+    return size - 1; // Return updated size
 }
 
 void update(int arr[], int size, int position, int new_value) {
@@ -62,7 +63,7 @@ int main() {
         scanf("%d", &arr[i]);
     }
 
-    do {
+    while (1) {
         printf("\nMenu:\n");
         printf("1. Display\n");
         printf("2. Insert\n");
@@ -84,14 +85,13 @@ int main() {
             printf("Enter the position to insert at (0-based index): ");
             scanf("%d", &position);
             insert(arr, size, element, position);
-            size++;  // Increase the size of the array
+            size++; // Increase the size of the array
             break;
 
         case 3:
             printf("Enter the position to delete (0-based index): ");
             scanf("%d", &position);
-            delete (arr, size, position);
-            size--;  // Decrease the size of the array
+            size = delete(arr, size, position); // Update size after deletion
             break;
 
         case 4:
@@ -110,12 +110,12 @@ int main() {
 
         case 6:
             printf("Exiting program.\n");
-            break;
+            return 0; // Exit the program
 
         default:
             printf("Invalid choice! Please try again.\n");
         }
-    } while (choice != 6);
+    }
 
     return 0;
 }
